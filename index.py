@@ -1,11 +1,5 @@
-from typing import Final
-from audio import get_metronome_ticks
-from bpm import nearest_compass_tick
+from sys import argv
+from charter import generate_chart
 
-AUDIO_PATH: Final[str] = ""
-
-metronome_ticks = get_metronome_ticks(AUDIO_PATH)
-
-x = nearest_compass_tick(120, metronome_ticks[0])
-
-print(x)
+audio_path = argv[1]
+generate_chart(audio_path)
