@@ -8,9 +8,13 @@ INITIAL_TICK: Final[int] = 0
 INITIAL_BPM: Final[int] = 120
 CHART_FILE_NAME: Final[str] = "notes.chart"
 
-def generate_chart(audio_path: str) -> None:
+def generate_chart(audio_path: str, start: int) -> None:
     print("Loading audio...")
     times = get_metronome_ticks(audio_path)
+    if start > 0:
+        print("Skipping beats...")
+        skip = start - 1
+        times = times[skip:]
     print("Syncing track...")
     track = sync_track(times)
     print("Generating chart file...")
