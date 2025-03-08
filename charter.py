@@ -1,5 +1,5 @@
 from audio import get_metronome_ticks
-from bpm import calculate_bpm
+from bpm import calculate_bpm, calculate_bpm_compass
 from typing import List, Dict, Final
 from numpy import float64
 
@@ -26,7 +26,11 @@ def sync_track(times: List[float64]) -> List[Dict]:
     current_bpm = INITIAL_BPM
 
     for current_time in times:
-        data = calculate_bpm(current_bpm, current_tick, prev_time, current_time)
+        if prev_time == INITIAL_TIME:
+            data = calculate_bpm_compass(current_bpm, current_time)
+        else:
+            data = calculate_bpm(current_bpm, current_tick, prev_time, current_time)
+        
         track.append(data)
 
         current_bpm = data["next_bpm"]
