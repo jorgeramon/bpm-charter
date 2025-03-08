@@ -51,7 +51,8 @@ def generate_chart_content(track: List[Dict]) -> str:
   MediaType = "cd"
 }
 [SyncTrack]
-{\n"""
+{
+  0 = TS 4\n"""
 
     for data in track:
         chart_content += f"  {int(data["current_tick"])} = B {int(data["next_bpm"] * 1000)}\n"
